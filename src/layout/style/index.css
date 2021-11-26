@@ -1,0 +1,78 @@
+#components-layout-demo-fixed-sider .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout .site-layout-background {
+    background: #fff;
+    width: 100%;
+}
+
+
+.header-layout {
+    background: #ffffff;
+    height: 48px;
+    /*flex: none;*/
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    padding-right: 50px;
+    border-bottom: 1px solid #F2F3F5;
+    text-align: right;
+}
+
+.right {
+    display: flex;
+    margin-left: auto;
+}
+
+.space-layout {
+    size: 20px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.my-dropdown {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 48px;
+    margin: 0;
+    /*text-align: right;*/
+}
+
+.item {
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /*position: relative;*/
+    margin-right: 10px;
+    display: flex;
+}
+
+.sub-item {
+    vertical-align: middle;
+    margin-right: 10px;
+    align-self: center;
+}
+
+
+.title {
+    color: white;
+    font-size: large;
+}
+
+
+.side-layout {
+    overflow: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    z-index: 2;
+}
+
+
+
+

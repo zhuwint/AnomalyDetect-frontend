@@ -1,0 +1,124 @@
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.container .banner {
+    width: 550px;
+    background: linear-gradient(163.85deg, #1d2129 0%, #00308f 100%);
+}
+
+.container .content {
+    flex: 1;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.container .footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.logo {
+    position: fixed;
+    top: 24px;
+    left: 22px;
+    display: inline-flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.logo-text {
+    margin-left: 4px;
+    margin-right: 4px;
+    font-size: 20px;
+    color: white;
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-inner {
+    height: 100%;
+    flex: 1;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-inner {
+    text-align: center;
+}
+
+.carousel {
+    height: 100%;
+}
+
+.carousel-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.carousel-title {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 28px;
+    color: white;
+    padding-top: 30%;
+}
+
+.carousel-sub-title {
+    margin-top: 8px;
+    font-size: 18px;
+    line-height: 22px;
+    color: white;
+}
+
+.carousel-image {
+    margin-top: 30px;
+    width: 320px;
+}
+
+.login-form-wrapper {
+    width: 320px;
+
+}
+
+.login-form-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+    line-height: 32px;
+}
+
+.login-form-sub-title {
+    font-size: 16px;
+    line-height: 24px;
+    color: white;
+}
+
+.login-form-error-msg {
+    height: 32px;
+    line-height: 32px;
+    color: red;
+}
+
+.login-form-password-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-form-register-btn {
+    color: cornflowerblue !important;
+}
