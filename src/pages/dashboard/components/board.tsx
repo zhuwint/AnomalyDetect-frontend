@@ -41,7 +41,7 @@ export const DataBoard: React.FC<IProps> = (props) => {
                     message.error(res.msg);
                 }
             }).catch(err => {
-                message.error("未知错误");
+                message.error("获取失败");
             });
         }
     }, [props]);

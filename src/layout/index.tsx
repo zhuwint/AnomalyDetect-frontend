@@ -4,7 +4,6 @@ import ProLayout, {PageContainer} from "@ant-design/pro-layout";
 import {routeConfig} from "./route";
 import {LayoutHeader} from "./components/header";
 import {LayoutFooter} from "./components/footer";
-import {GithubOutlined} from "@ant-design/icons";
 import {NavLink, Route} from "react-router-dom";
 import ErrorBoundary from "../pages/error";
 
@@ -20,7 +19,7 @@ const customSettings: Partial<ProSettings> = {
 };
 
 
-export default () => {
+const LayoutPage: React.FC = () => {
     const [pathname, setPathname] = useState<string>("/home");
 
 
@@ -77,3 +76,5 @@ export default () => {
         </div>
     );
 };
+
+export default LayoutPage;

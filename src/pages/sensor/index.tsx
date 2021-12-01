@@ -27,7 +27,7 @@ const Sensor: React.FC = () => {
                 }
                 setLoading(false);
             }).catch(() => {
-                message.error("服务器错误", 2).then(() => setLoading(false));
+                message.error("获取失败", 2).then(() => setLoading(false));
             });
         }
     }, [project]);

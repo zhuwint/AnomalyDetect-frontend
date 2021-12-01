@@ -17,14 +17,12 @@ export interface ProjectIdName {
 }
 
 // 获取项目列表
-export const FetchProjects = () => {
-    return new Promise((resolve: (value: AxiosResponseData<ProjectIdName[]>) => void, reject) => {
-        Axios.request<AxiosResponseData<ProjectIdName[]>>({
-            method: "GET",
-            url: "/controller/manage/projects",
-        }).then((res) => resolve(res.data)).catch(err => reject(err));
-    });
-};
+export async function FetchProjects() {
+    return Axios.request<AxiosResponseData<ProjectIdName[]>>({
+        method: "GET",
+        url: "/controller/manage/projects",
+    }).then(res => res.data);
+}
 
 
 // -----------------------------------------------------------------------------------------------
@@ -48,14 +46,12 @@ export interface SensorInfo {
 }
 
 // 获取传感器列表
-export const FetchSensors = (data: SensorQuery) => {
-    return new Promise((resolve: (value: AxiosResponseData<SensorInfo[]>) => void, reject) => {
-        Axios.request<AxiosResponseData<SensorInfo[]>>({
-            method: "POST",
-            url: "/controller/manage/sensors",
-            data: data,
-        }).then(res => resolve(res.data)).catch(err => reject(err));
-    });
+export async function FetchSensors(data: SensorQuery) {
+    return Axios.request<AxiosResponseData<SensorInfo[]>>({
+        method: "POST",
+        url: "/controller/manage/sensors",
+        data: data,
+    }).then(res => res.data);
 };
 
 
@@ -72,14 +68,12 @@ export interface Location {
 }
 
 // 获取位置信息
-export const FetchLocations = (projectId: number) => {
-    return new Promise((resolve: (value: AxiosResponseData<Location[]>) => void, reject) => {
-        Axios.request<AxiosResponseData<Location[]>>({
-            method: "GET",
-            url: "/controller/manage/locations",
-            params: {project_id: projectId},
-        }).then(res => resolve(res.data)).catch(err => reject(err));
-    });
+export async function FetchLocations(projectId: number) {
+    return Axios.request<AxiosResponseData<Location[]>>({
+        method: "GET",
+        url: "/controller/manage/locations",
+        params: {project_id: projectId},
+    }).then(res => res.data);
 };
 
 
@@ -92,13 +86,11 @@ export interface Measurement {
 }
 
 export const FetchMeasurements = (typeId: number) => {
-    return new Promise((resolve: (value: AxiosResponseData<Measurement[]>) => void, reject) => {
-        Axios.request<AxiosResponseData<Measurement[]>>({
-            method: "GET",
-            url: "/controller/manage/measurements",
-            params: {type_id: typeId},
-        }).then(res => resolve(res.data)).catch(err => reject(err));
-    });
+    return Axios.request<AxiosResponseData<Measurement[]>>({
+        method: "GET",
+        url: "/controller/manage/measurements",
+        params: {type_id: typeId},
+    }).then(res => res.data);
 };
 
 
@@ -136,11 +128,9 @@ export interface InfluxTable {
 }
 
 export const FetchTimeSeries = (data: DataQuery) => {
-    return new Promise((resolve: (value: AxiosResponseData<InfluxTable>) => void, reject) => {
-        Axios.request<AxiosResponseData<InfluxTable>>({
-            method: "POST",
-            url: "/controller/data/query",
-            data: data,
-        }).then(res => resolve(res.data)).catch(err => reject(err));
-    });
+    return Axios.request<AxiosResponseData<InfluxTable>>({
+        method: "POST",
+        url: "/controller/data/query",
+        data: data,
+    }).then(res => res.data);
 };

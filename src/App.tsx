@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Redirect, Route, Router, Switch} from "react-router-dom";
-import '@ant-design/pro-layout/dist/layout.css';
-import 'antd/dist/antd.css';
+import "@ant-design/pro-layout/dist/layout.css";
+import "antd/dist/antd.css";
 
 import history from "./history";
 import Login from "./pages/login";

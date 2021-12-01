@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {ReducerState} from "../../redux";
-import {Avatar, Button, Dropdown, Layout, Menu, message, Modal, Table} from "antd";
+import {Avatar, Button, Dropdown, Menu, message, Modal, Table} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import Text from "antd/es/typography/Text";
 import history from "../../history";
@@ -10,9 +10,6 @@ import "../style/index.css";
 import {GetProjectInfo, StoreProjectInfo, UserLogout} from "../../utils/useStorage";
 import {ProjectInfo} from "../../redux/global";
 import {FetchProjects, ProjectIdName} from "../../services/service_controller";
-
-
-const {Header} = Layout;
 
 interface Row extends ProjectIdName {
     key: string;
@@ -37,6 +34,7 @@ export const LayoutHeader: React.FC = () => {
             message.error("服务器错误", 2).then(() => {
             });
         });
+
         const oldProject = GetProjectInfo();
         dispatch({
             type: "update-project",
