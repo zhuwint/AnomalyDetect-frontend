@@ -33,7 +33,7 @@ const Sensor: React.FC = () => {
     }, [project]);
 
     return (
-        <Card title={<Title level={4}>传感器列表</Title>} bordered={false} loading={loading}
+        <Card bordered={false} loading={loading}
               extra={<Search placeholder="全文检索" onSearch={value => setSearchStr(value)} allowClear={true}
                              enterButton={true}/>}>
             <SensorList sensors={sensors} search={searchStr}/>

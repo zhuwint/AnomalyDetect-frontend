@@ -6,6 +6,7 @@ import {LayoutHeader} from "./components/header";
 import {LayoutFooter} from "./components/footer";
 import {NavLink, Route} from "react-router-dom";
 import ErrorBoundary from "../pages/error";
+import {renderRoutes} from "react-router-config";
 
 
 const customSettings: Partial<ProSettings> = {
@@ -22,15 +23,12 @@ const customSettings: Partial<ProSettings> = {
 const LayoutPage: React.FC = () => {
     const [pathname, setPathname] = useState<string>("/home");
 
-
     useEffect(() => {
-        console.log("set pathname");
         let endpoint: string[] = window.location.pathname.split("/");
         if (endpoint.length > 1) {
             setPathname("/" + endpoint[1]);
         }
     }, [window.location.pathname]);
-
 
     return (
         <div
@@ -65,9 +63,7 @@ const LayoutPage: React.FC = () => {
                     <div style={{backgroundColor: "white", padding: "12px", width: "100%"}}>
                         <ErrorBoundary>
                             {
-                                routeConfig.routes.map((item, index) => {
-                                    return <Route key={index.toString()} path={item.path} component={item.component}/>;
-                                })
+                                renderRoutes(routeConfig.routes)
                             }
                         </ErrorBoundary>
                     </div>

@@ -2937,6 +2937,15 @@
     hoist-non-react-statics "^3.3.0"
     redux "^4.0.0"
 
+"@types/react-router-config@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.nlark.com/@types/react-router-config/download/@types/react-router-config-5.0.3.tgz?cache=0&sync_timestamp=1629709032056&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Freact-router-config%2Fdownload%2F%40types%2Freact-router-config-5.0.3.tgz#72a53561bcb5e13b82c576527b818fa2579591c7"
+  integrity sha1-cqU1Yby14TuCxXZSe4GPoleVkcc=
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
 "@types/react-router-dom@^5.3.2":
   version "5.3.2"
   resolved "https://registry.npmmirror.com/@types/react-router-dom/download/@types/react-router-dom-5.3.2.tgz#ebd8e145cf056db5c66eb1dac63c72f52e8542ee"
@@ -11585,6 +11594,13 @@ react-resize-detector@^6.6.4:
     lodash.debounce "^4.0.8"
     lodash.throttle "^4.1.1"
     resize-observer-polyfill "^1.5.1"
+
+react-router-config@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.npm.taobao.org/react-router-config/download/react-router-config-5.1.1.tgz#0f4263d1a80c6b2dc7b9c1902c9526478194a988"
+  integrity sha1-D0Jj0agMay3HucGQLJUmR4GUqYg=
+  dependencies:
+    "@babel/runtime" "^7.1.2"
 
 react-router-dom@5.2.1:
   version "5.2.1"

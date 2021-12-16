@@ -49,6 +49,7 @@ export const LocationSelect: React.FC<{ onChange?: (data: any) => void }> = ({on
                   showSearch={{filter}}
                   value={selectValues}
                   bordered={false}
+                  size="small"
         />
     );
 };

@@ -1,7 +1,7 @@
 import {Axios} from "../utils/request";
 
 
-interface AxiosResponseData<T> {
+export interface AxiosResponseData<T> {
     status: number,
     msg: string,
     data: T
@@ -113,22 +113,12 @@ export interface DataQuery {
 
 export interface Point {
     time: string;
-    value: (number | null)[];
-}
-
-export interface TimeSeries {
-    name: string;
-    column: string[];
-    rows: Point[];
-}
-
-
-export interface InfluxTable {
-    table: TimeSeries[];
+    value: (number | null);
+    field_tag: string;
 }
 
 export const FetchTimeSeries = (data: DataQuery) => {
-    return Axios.request<AxiosResponseData<InfluxTable>>({
+    return Axios.request<AxiosResponseData<Point[]>>({
         method: "POST",
         url: "/controller/data/query",
         data: data,

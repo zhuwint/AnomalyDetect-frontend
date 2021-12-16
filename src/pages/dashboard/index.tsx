@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {ReducerState} from "../../redux";
-import {FetchMeasurements, Location, Measurement, SensorInfo} from "../../services/service_controller";
-import {useLocation} from "react-router-dom";
+import {FetchMeasurements, FetchSensors, Location, Measurement, SensorInfo} from "../../services/service_controller";
+import {useHistory, useLocation} from "react-router-dom";
 import {SensorSelector} from "../../components/selector/sensor";
 import {TimeRange, TimeRangeSelector} from "../../components/selector/timerange";
-import {Col, message, Row, Tabs} from "antd";
+import {Button, Col, message, Row, Tabs} from "antd";
 import {IntervalSelector} from "../../components/selector/interval";
 import {DataBoard} from "./components/board";
+import {LeftOutlined} from "@ant-design/icons";
+import Text from "antd/es/typography/Text";
 
 // location 刷新时不消失
 const DashBoard: React.FC = () => {
     const location = useLocation();
+    const history = useHistory();
     const [sensor, setSensor] = useState<SensorInfo>();
     const [measurements, setMeasurements] = useState<Measurement[]>([]);
     const [timeRange, setTimeRange] = useState<TimeRange>({start: "", stop: ""});
@@ -34,6 +37,15 @@ const DashBoard: React.FC = () => {
             });
         } else {
             // TODO: 初始化sensor
+            // if (project) {
+            //     FetchSensors({project_id: project.id.toString()}).then(res => {
+            //         if (res.status === 0 && res.data.length > 0) {
+            //             setSensor(res.data[0]);
+            //         }
+            //     }).catch(() => {
+            //         message.error("无法连接服务器");
+            //     });
+            // }
         }
     }, [project]);
 
@@ -56,9 +68,10 @@ const DashBoard: React.FC = () => {
 
     return (
         <div>
+            <Button type="link" icon={<LeftOutlined/>} onClick={() => history.goBack()}>返回</Button>
             <Row>
                 <Col span={16}>
-                    <SensorSelector onChange={setSensor}/>
+                    <SensorSelector onChange={setSensor} defaultValue={sensor}/>
                 </Col>
                 <Col span={8}>
                     <Row>
@@ -72,7 +85,7 @@ const DashBoard: React.FC = () => {
                 </Col>
             </Row>
             <br/>
-            <Tabs tabPosition="left" defaultActiveKey="1" style={{height: "100vh"}}
+            <Tabs tabPosition="left" defaultActiveKey="1"
                   onChange={value => setTabKey(value)}>
                 {
                     measurements.map((measurement, index) => {
@@ -84,6 +97,8 @@ const DashBoard: React.FC = () => {
                                                    measurement={measurement}
                                                    timeRange={timeRange}
                                                    interval={interval}
+                                                   enableCreate={true}
+                                                   height={350}
                                         />
                                 }
                             </Tabs.TabPane>

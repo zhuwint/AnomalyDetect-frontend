@@ -1,9 +1,18 @@
 import React from "react";
-import {DashboardOutlined, HomeOutlined, UnorderedListOutlined} from "@ant-design/icons";
+import {
+    AppstoreAddOutlined,
+    DashboardOutlined,
+    FundOutlined,
+    HomeOutlined,
+    MessageOutlined,
+    UnorderedListOutlined,
+} from "@ant-design/icons";
 import Home from "../pages/home";
 import Sensor from "../pages/sensor";
 import DashBoard from "../pages/dashboard";
-
+import Task from "../pages/task";
+import ModelService from "../pages/modelservice";
+import SystemRecordPage from "../pages/record";
 
 export const routeConfig = {
     path: "/",
@@ -26,34 +35,24 @@ export const routeConfig = {
             icon: <DashboardOutlined/>,
             component: DashBoard,
         },
-
-        // {
-        //     path: "/admin",
-        //     name: "管理页",
-        //     icon: <CrownOutlined/>,
-        //     access: "canAdmin",
-        //     component: "./Admin",
-        //     routes: [
-        //         {
-        //             path: "/admin/sub-page1",
-        //             name: "一级页面",
-        //             icon: <CrownOutlined/>,
-        //             component: "./Welcome",
-        //         },
-        //         {
-        //             path: "/admin/sub-page2",
-        //             name: "二级页面",
-        //             icon: <CrownOutlined/>,
-        //             component: "./Welcome",
-        //         },
-        //         {
-        //             path: "/admin/sub-page3",
-        //             name: "三级页面",
-        //             icon: <CrownOutlined/>,
-        //             component: "./Welcome",
-        //         },
-        //     ],
-        // },
+        {
+            path: "/task",
+            name: "任务",
+            icon: <FundOutlined/>,
+            component: Task,
+        },
+        {
+            path: "/model",
+            name: "模型注册中心",
+            icon: <AppstoreAddOutlined/>,
+            component: ModelService,
+        },
+        {
+            path: "/record",
+            name: "系统日志",
+            icon: <MessageOutlined/>,
+            component: SystemRecordPage,
+        },
     ],
 };
 

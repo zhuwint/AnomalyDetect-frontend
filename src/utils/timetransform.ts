@@ -32,7 +32,7 @@ export function parseTimeDay(timestamp: number) {
 }
 
 // 将utc时间字符串转化为datetime格式YYYY-MM-DD HH:MM:SS
-export function parseDate(utcString: string) {
+export function parseDate(utcString: string | number) {
     let parse_date = new Date(utcString);
     // 设置时区偏移量
     parse_date.setMinutes(parse_date.getMinutes() - parse_date.getTimezoneOffset());

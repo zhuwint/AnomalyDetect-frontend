@@ -6,14 +6,24 @@ import {ReducerState} from "../../redux";
 import {FetchSensors, SensorInfo, SensorQuery} from "../../services/service_controller";
 import "./styles/index.css";
 
-export const SensorSelector: React.FC<{ onChange?: (data: SensorInfo) => void }> = ({onChange}) => {
+
+interface IProps {
+    onChange?: (data: SensorInfo) => void;
+    defaultValue?: SensorInfo;
+}
+
+export const SensorSelector: React.FC<IProps> = (props) => {
     const project = useSelector((state: ReducerState) => state.global.project);
     const [sensors, setSensors] = useState<SensorInfo[]>([]);
     const [selected, setSelected] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        setSelected("");
+        if (props.defaultValue) {
+            setSelected(props.defaultValue.sensor_mac);
+        } else {
+            setSelected("");
+        }
     }, [project]);
 
     const selectSensorChanged = (sensorMac: string) => {
@@ -22,14 +32,15 @@ export const SensorSelector: React.FC<{ onChange?: (data: SensorInfo) => void }>
         if (sensor === undefined) {
             throw new Error("传感器不存在");
         }
-        if (onChange) {
-            onChange(sensor);
+        if (props.onChange) {
+            props.onChange(sensor);
         }
     };
 
 
     const locationChanged = (option: LocationTreeNode) => {
         setSelected("");
+        setSensors([]);
         if (project) {
             setLoading(true);
             FetchSensors({
@@ -52,12 +63,12 @@ export const SensorSelector: React.FC<{ onChange?: (data: SensorInfo) => void }>
 
     return (
         <Row align="middle">
-            <Col span={12}>
+            <Col span={16}>
                 <LocationSelect onChange={locationChanged}/>
             </Col>
             <Col span={6} style={{marginLeft: "10px"}}>
                 <Select placeholder="请选择传感器" showSearch optionFilterProp="children" loading={loading}
-                        className="my-selector"
+                        className="my-selector" size="small"
                         filterOption={
                             (input, option: any) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
