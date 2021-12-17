@@ -21,12 +21,18 @@ interface IProps {
 export const LineGraph: React.FC<IProps> = (props) => {
     let regions: any[] = [];
     if (props.regionMark && props.data.length > 0) {
+        let i = 0;        // 数据索引
         props.regionMark.forEach((item, index) => {
             let start = index === 0 ? props.data[0].time : regions[regions.length - 1].end[0];
+            for (; i < props.data.length - 1; i++) {
+                if (props.data[i].time <= item.end && props.data[i + 1].time > item.end) {
+                    break;
+                }
+            }
             let r: any = {
                 type: "region",
                 start: [start, "min"],
-                end: [item.end, "max"],
+                end: [props.data[i].time, "max"],
                 style: {
                     fill: item.alert ? "red" : "green",
                 },
@@ -60,7 +66,7 @@ export const LineGraph: React.FC<IProps> = (props) => {
                 formatter: (value: number) => value.toFixed(4),
             },
             time: {
-                type: "time",
+                // type: "time",
                 formatter: (value: number) => parseDate(value),
             },
         },
