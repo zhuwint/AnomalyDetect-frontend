@@ -57,6 +57,23 @@ export const AlertRecordList: React.FC<IProps> = (props) => {
             },
         },
         {
+            title: "数据范围",
+            children: [
+                {
+                    title: "开始",
+                    dataIndex: "start",
+                    key: "start",
+                    render: (text: string) => parseDate(text)
+                },
+                {
+                    title: "结束",
+                    dataIndex: "stop",
+                    key: "stop",
+                    render: (text: string) => parseDate(text)
+                },
+            ]
+        },
+        {
             title: "阈值下限",
             dataIndex: "threshold_lower",
             key: "threshold_lower",

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {FetchTimeSeries, Measurement, Point} from "../../../services/service_controller";
+import {Measurement} from "../../../services/service_controller";
 import {TimeRange} from "../../../components/selector/timerange";
-import {LineGraph, RegionMark} from "../../../components/graph/line";
+import {RegionMark} from "../../../components/graph/line";
 import {useSelector} from "react-redux";
 import {ReducerState} from "../../../redux";
-import {Button, Empty, message, Row, Space} from "antd";
+import {Button, message, Row, Space} from "antd";
 import {NavLink} from "react-router-dom";
 import {DeleteTask, EnableOrDisableTask, FetchTaskWithTarget, SimpleStatus} from "../../../services/service_task";
 import {TaskList} from "../../../components/task/tasklist";
@@ -12,7 +12,6 @@ import {TimeSeriesDataBoard} from "../../../components/board/board";
 import {AlertRecordList} from "../../task/components/record";
 import Text from "antd/es/typography/Text";
 import {AlertRecord} from "../../../services/service_record";
-import {parseDateUtc} from "../../../utils/timetransform";
 
 interface IProps {
     sensorMac: string;
@@ -58,8 +57,8 @@ export const DataBoard: React.FC<IProps> = (props) => {
         let r: RegionMark[] = [];
         data.forEach((item, index) => {
             r.push({
-                start: "",
-                end: parseDateUtc(item.time),
+                start: item.start,
+                end: item.stop,
                 alert: item.alert,
             });
         });

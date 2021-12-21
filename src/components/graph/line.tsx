@@ -22,7 +22,16 @@ export const LineGraph: React.FC<IProps> = (props) => {
     let regions: any[] = [];
     if (props.regionMark && props.data.length > 0) {
         let i = 0;        // 数据索引
+        let j = 0;
         props.regionMark.forEach((item, index) => {
+            for (; j < props.data.length - 1; j++) {
+                if (props.data[j].time > item.start) {     // 比第一个小
+                    break;
+                }
+                if (props.data[j].time <= item.start && props.data[j + 1].time > item.start) {
+                    break;
+                }
+            }
             let start = index === 0 ? props.data[0].time : regions[regions.length - 1].end[0];
             for (; i < props.data.length - 1; i++) {
                 if (props.data[i].time <= item.end && props.data[i + 1].time > item.end) {
@@ -31,7 +40,7 @@ export const LineGraph: React.FC<IProps> = (props) => {
             }
             let r: any = {
                 type: "region",
-                start: [start, "min"],
+                start: [props.data[j].time, "min"],
                 end: [props.data[i].time, "max"],
                 style: {
                     fill: item.alert ? "red" : "green",

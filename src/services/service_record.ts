@@ -18,6 +18,8 @@ export type SystemRecord = {
 
 export type AlertRecord = {
     time: string
+    start: string
+    stop: string
     task_id: string
     project_id: string
     sensor_mac: string
