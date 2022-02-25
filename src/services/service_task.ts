@@ -24,6 +24,27 @@ export const FetchTaskList = (projectId: string) => {
         url: "/controller/task",
         params: {
             projectId: projectId,
+            isUnion: false,
+        },
+    }).then(res => res.data);
+};
+
+
+export interface SimpleUnionStatus {
+    project_id: string;
+    task_id: string;
+    task_name: string;
+    enable: boolean;
+    is_anomaly: boolean;
+}
+
+export const FetchUnionTaskList = (projectId: string) => {
+    return Axios.request<AxiosResponseData<SimpleUnionStatus[]>>({
+        method: "GET",
+        url: "/controller/task",
+        params: {
+            projectId: projectId,
+            isUnion: true,
         },
     }).then(res => res.data);
 };
@@ -67,12 +88,12 @@ export interface QueryOptions {
     measurement: string;
 }
 
-export interface BatchMeta {
+export type BatchMeta = {
     interval: string;
     query: QueryOptions;
 }
 
-export interface StreamMeta {
+export type StreamMeta = {
     bucket: string;
     measurement: string;
     series: UnvariedSeries | null;
@@ -122,7 +143,6 @@ export const CreateStreamTask = (info: StreamTaskInfo) => {
     }).then(res => res.data);
 };
 
-
 export const UpdateBatchTask = (taskId: string, projectId: string, info: BatchTaskInfo) => {
     return Axios.request<AxiosResponseData<null>>({
         method: "PUT",
@@ -148,6 +168,77 @@ export const UpdateStreamTask = (taskId: string, projectId: string, info: Stream
 };
 
 
+export type UnionMeta = {
+    sensor_mac: string
+    sensor_type: string
+    receive_no: string
+    threshold_upper: number
+    threshold_lower: number
+}
+
+export type UnionTaskInfo = {
+    task_id: string
+    task_name: string
+    project_id: number
+    bucket: string
+    measurement: string
+    series: UnionMeta[]
+    operate: number[]
+    duration: string
+    is_stream: boolean
+    level: number
+}
+
+
+export const CreateUnionTask = (info: UnionTaskInfo) => {
+    return Axios.request<AxiosResponseData<null>>({
+        method: "POST",
+        url: "/controller/task/union",
+        data: info,
+    }).then(res => res.data);
+};
+
+
+export const UpdateUnionTask = (taskId: string, projectId: string, info: UnionTaskInfo) => {
+    return Axios.request<AxiosResponseData<null>>({
+        method: "PUT",
+        url: "/controller/task/union",
+        params: {
+            taskId: taskId,
+            projectId: projectId,
+        },
+        data: info,
+    }).then(res => res.data);
+};
+
+
+export type UnionTaskStatus = {
+    info: UnionTaskInfo
+    created: string
+    updated: string
+    state: {
+        [id: string]: {
+            last: string,
+            triggered: number,
+            value: number
+        }
+    }
+    enable: boolean
+    is_anomaly: boolean
+}
+
+export const GetUnionTask = (taskId: string, projectId: string) => {
+    return Axios.request<AxiosResponseData<UnionTaskStatus>>({
+        method: "GET",
+        url: "/controller/task",
+        params: {
+            taskId: taskId,
+            projectId: projectId,
+        },
+    }).then(res => res.data);
+};
+
+
 export const SetThreshold = (taskId: string, projectId: string, lower: number | null, upper: number | null) => {
     return Axios.request<AxiosResponseData<null>>({
         method: "POST",
@@ -157,6 +248,25 @@ export const SetThreshold = (taskId: string, projectId: string, lower: number | 
             projectId: projectId,
         },
         data: {
+            upper: upper,
+            lower: lower,
+        },
+    }).then(res => res.data);
+};
+
+export const SetUnionThreshold = (taskId: string, projectId: string, sensorMac: string, sensorType: string,
+                                  receiveNo: string, lower: number | null, upper: number | null) => {
+    return Axios.request<AxiosResponseData<null>>({
+        method: "POST",
+        url: "/controller/task/set",
+        params: {
+            taskId: taskId,
+            projectId: projectId,
+        },
+        data: {
+            sensor_mac: sensorMac,
+            sensor_type: sensorType,
+            receive_no: receiveNo,
             upper: upper,
             lower: lower,
         },

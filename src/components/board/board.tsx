@@ -46,6 +46,13 @@ export const TimeSeriesDataBoard: React.FC<IProps> = (props) => {
                     res.data.forEach((item, index)=>{
                         res.data[index].time = parseDateUtc(res.data[index].time)
                     })
+                    res.data.sort(function (a: Point, b: Point){
+                        if (a.time < b.time) {
+                            return -1
+                        }
+                        return 1
+                    })
+
                     setData(res.data);
                     setError("");
                 } else {

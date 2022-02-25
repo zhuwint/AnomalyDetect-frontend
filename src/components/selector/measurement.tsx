@@ -55,7 +55,7 @@ export const MeasurementSelector: React.FC<IProps> = (props) => {
             <Col span={12}>
                 <SensorSelector onChange={onSensorChanged}/>
             </Col>
-            <Col span={4}>
+            <Col span={3}>
                 <Select className="my-selector" value={selectedMeasurement}
                         onChange={value => setSelectMeasurement(value)}
                         size="small" bordered={false}>

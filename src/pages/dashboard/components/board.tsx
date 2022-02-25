@@ -55,14 +55,22 @@ export const DataBoard: React.FC<IProps> = (props) => {
     // 设置区域标注
     const createRegionMark = (data: AlertRecord[]) => {
         let r: RegionMark[] = [];
-        data.forEach((item, index) => {
-            r.push({
-                start: item.start,
-                end: item.stop,
-                alert: item.alert,
-            });
+        data.reverse().forEach((item, index) => {
+            if (r.length !== 0) {
+                r.push({
+                    start: item.start,
+                    end: r[r.length - 1].start,
+                    alert: item.alert,
+                });
+            } else {
+                r.push({
+                    start: item.start,
+                    end: item.stop,
+                    alert: item.alert,
+                });
+            }
         });
-        setRegion(r);
+        setRegion(r.reverse());
     };
 
     const deleteTask = (id: string) => {

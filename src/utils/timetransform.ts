@@ -39,6 +39,13 @@ export function parseDate(utcString: string | number) {
     return parse_date.toJSON().substr(0, 19).replace("T", " ");
 }
 
+export function parseDateNotUseLocal(utcString: string|number) {
+    let parse_date = new Date(utcString);
+    // 设置时区偏移量
+    parse_date.setMinutes(parse_date.getMinutes());
+    return parse_date.toJSON().substr(0, 19).replace("T", " ");
+}
+
 // 将utc时间字符串转化为datetime格式YYYY-MM-DDTHH:MM:SSZ
 export function parseDateUtc(utcString: string) {
     let parse_date = new Date(utcString);

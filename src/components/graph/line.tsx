@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Line} from "@ant-design/charts";
 import {Point} from "../../services/service_controller";
-import {parseDate, parseTime} from "../../utils/timetransform";
+import {parseDateNotUseLocal} from "../../utils/timetransform";
 
 
 export type RegionMark = {
@@ -24,17 +24,19 @@ export const LineGraph: React.FC<IProps> = (props) => {
         let i = 0;        // 数据索引
         let j = 0;
         props.regionMark.forEach((item, index) => {
+            if (i === props.data.length || j === props.data.length) {
+                return
+            }
             for (; j < props.data.length - 1; j++) {
-                if (props.data[j].time > item.start) {     // 比第一个小
+                if (props.data[j].time >= item.start) {     // 比第一个小
                     break;
                 }
-                if (props.data[j].time <= item.start && props.data[j + 1].time > item.start) {
+                if (props.data[j].time <= item.start && props.data[j + 1].time >= item.start) {
                     break;
                 }
             }
-            let start = index === 0 ? props.data[0].time : regions[regions.length - 1].end[0];
             for (; i < props.data.length - 1; i++) {
-                if (props.data[i].time <= item.end && props.data[i + 1].time > item.end) {
+                if (props.data[i].time <= item.end && props.data[i + 1].time >= item.end) {
                     break;
                 }
             }
@@ -48,7 +50,11 @@ export const LineGraph: React.FC<IProps> = (props) => {
                 animate: false,
             };
             regions.push(r);
+            // i++
+            // j++
         });
+
+        // console.log(regions)
 
         // 尚未进行异常检测的区间
         let start = regions.length === 0 ? props.data[0].time : regions[regions.length - 1].end[0];
@@ -62,6 +68,33 @@ export const LineGraph: React.FC<IProps> = (props) => {
             animate: false,
         });
     }
+    // if (props.regionMark && props.data.length > 0) {
+    //     let mark = props.regionMark.reverse();
+    //     let i = props.data.length - 1;        // 开始时间
+    //     let j = i;                            // 结束时间
+    //     mark.forEach((item, index) => {
+    //         for (; j >= 1; j--) {
+    //             if (props.data[j].time >= item.end && props.data[j-1].time <= item.end) {
+    //                 break;
+    //             }
+    //         }
+    //         for (i = j; i >= 1; i--) {
+    //             if (props.data[i].time >= item.start && props.data[i - 1].time <= item.start) {
+    //                 break;
+    //             }
+    //         }
+    //         let r: any = {
+    //             type: "region",
+    //             start: [props.data[i].time, "min"],
+    //             end: [props.data[j].time, "max"],
+    //             style: {
+    //                 fill: item.alert ? "red" : "green",
+    //             },
+    //             animate: false,
+    //         };
+    //         regions.push(r)
+    //     });
+    // }
 
     const config = {
         data: props.data,
@@ -76,7 +109,7 @@ export const LineGraph: React.FC<IProps> = (props) => {
             },
             time: {
                 // type: "time",
-                formatter: (value: number) => parseDate(value),
+                formatter: (value: number) => parseDateNotUseLocal(value),
             },
         },
         xAxis: {
@@ -89,12 +122,16 @@ export const LineGraph: React.FC<IProps> = (props) => {
             trendCfg: {
                 isArea: false,
             },
-            formatter: (value: string) => parseDate(value),
+            formatter: (value: string) => parseDateNotUseLocal(value),
         },
         height: props.height ? props.height : 200,
         annotations: [
             ...regions,
         ],
+        // point: {
+        //     shape: 'circle',
+        //     size: 2,
+        // }
     };
 
     return (

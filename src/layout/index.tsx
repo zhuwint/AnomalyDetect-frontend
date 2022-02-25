@@ -4,7 +4,7 @@ import ProLayout, {PageContainer} from "@ant-design/pro-layout";
 import {routeConfig} from "./route";
 import {LayoutHeader} from "./components/header";
 import {LayoutFooter} from "./components/footer";
-import {NavLink, Route} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import ErrorBoundary from "../pages/error";
 import {renderRoutes} from "react-router-config";
 
@@ -46,7 +46,7 @@ const LayoutPage: React.FC = () => {
                 )
                 }
                 logo={null}
-                title={"时间序列分析系统"}
+                title={"物联网监测预警系统"}
                 menuHeaderRender={(logo, title) => (
                     <div id="customize_menu_header">
                         {logo}

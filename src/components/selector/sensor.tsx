@@ -62,11 +62,11 @@ export const SensorSelector: React.FC<IProps> = (props) => {
 
 
     return (
-        <Row align="middle">
+        <Row align="middle" gutter={8}>
             <Col span={16}>
                 <LocationSelect onChange={locationChanged}/>
             </Col>
-            <Col span={6} style={{marginLeft: "10px"}}>
+            <Col span={8}>
                 <Select placeholder="请选择传感器" showSearch optionFilterProp="children" loading={loading}
                         className="my-selector" size="small"
                         filterOption={

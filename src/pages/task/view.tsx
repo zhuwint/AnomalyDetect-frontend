@@ -115,10 +115,11 @@ export const TaskView: React.FC = () => {
                             <Divider orientation="left">检测模型</Divider>
                             <ModelPanel model={task.info.detect_model}/>
                             <Divider orientation="left">模型更新</Divider>
-                            <TaskState state={task.model_update} isStream={false}
+                            <TaskState state={task.model_update} isStream={false} info={task.info.model_update}
                                        dispatch={() => enableOrDisable(true, !task.model_update.enable)}/>
                             <Divider orientation="left">异常检测</Divider>
                             <TaskState state={task.anomaly_detect} isStream={task.info.is_stream}
+                                       info={task.info.anomaly_detect}
                                        dispatch={() => enableOrDisable(false, !task.anomaly_detect.enable)}/>
                         </Card>
                     </>

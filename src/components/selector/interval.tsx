@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {Select} from "antd";
 import "./styles/index.css";
-import {createInterface} from "readline";
 
 const intervalOptions = [
     {
@@ -19,6 +18,10 @@ const intervalOptions = [
     {
         value: "2h",
         name: "2 hour",
+    },
+    {
+        value: "6h",
+        name: "6 hour"
     },
     {
         value: "1d",
