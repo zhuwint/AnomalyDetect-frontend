@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {SimpleUnionStatus} from "../../services/service_task";
+import {SimpleStatus, SimpleUnionStatus} from "../../services/service_task";
 import {Button, Popconfirm, Table, Tag, Tooltip} from "antd";
 import {NavLink} from "react-router-dom";
 import {QuestionCircleOutlined} from "@ant-design/icons";
@@ -84,8 +84,25 @@ export const UnionList: React.FC<IProps> = (props) => {
         },
     ];
 
+    let display: SimpleUnionStatus[] = [];
+    props.dataSource.forEach((item, index) => {
+        let show: boolean = false;
+        if (props.searchStr && props.searchStr !== "") {
+            // TODO: 目前是对所有字段进行搜索，但实际上table显示的并不是所有字段
+            Object.values(item).forEach(value => {
+                if (value.toString().indexOf(props.searchStr) !== -1) {
+                    show = true;
+                    return;
+                }
+            });
+        }
+        if (show || props.searchStr === undefined || props.searchStr === "") {
+            display.push(Object.assign({}, item, {"key": index.toString()}));
+        }
+    });
+
     return (
-        <Table columns={columns} dataSource={props.dataSource} size="small" scroll={{x: "max-content"}}
+        <Table columns={columns} dataSource={display} size="small" scroll={{x: "max-content"}}
                pagination={{
                    position: ["bottomCenter"],
                    pageSize: 12,

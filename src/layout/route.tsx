@@ -39,13 +39,13 @@ export const routeConfig = {
         },
         {
             path: "/task",
-            name: "单阈值告警任务",
+            name: "单测点告警任务",
             icon: <FundOutlined/>,
             component: Task,
         },
         {
             path: "/union",
-            name: "多阈值联合告警任务",
+            name: "多测点联合告警任务",
             icon: <DeploymentUnitOutlined/>,
             component: UnionTask,
         },

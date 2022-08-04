@@ -46,7 +46,7 @@ const LayoutPage: React.FC = () => {
                 )
                 }
                 logo={null}
-                title={"物联网监测预警系统"}
+                title={""}
                 menuHeaderRender={(logo, title) => (
                     <div id="customize_menu_header">
                         {logo}

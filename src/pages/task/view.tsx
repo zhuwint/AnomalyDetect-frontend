@@ -12,6 +12,8 @@ import {TaskState} from "./components/taskstate";
 import {DataPanel} from "./components/datapannel";
 import {ModelPanel} from "./components/model";
 import {ThresholdSetter} from "./components/threshold";
+import {AlertRecordList} from "./components/record";
+import {TimeRange, TimeRangeSelector} from "../../components/selector/timerange";
 
 
 export const TaskView: React.FC = () => {
@@ -20,6 +22,7 @@ export const TaskView: React.FC = () => {
     const project = useSelector((state: ReducerState) => state.global.project);
     const [error, setError] = useState<string>("");
     const [task, setTask] = useState<TaskStatus>();
+    const [range, setRange] = useState<TimeRange>({start: "", stop: ""});
 
     useEffect(() => {
         fetchTask();
@@ -121,6 +124,11 @@ export const TaskView: React.FC = () => {
                             <TaskState state={task.anomaly_detect} isStream={task.info.is_stream}
                                        info={task.info.anomaly_detect}
                                        dispatch={() => enableOrDisable(false, !task.anomaly_detect.enable)}/>
+                        </Card>
+                        <Divider />
+                        <Card bordered={false} size='small' title="告警日志"
+                        extra={<TimeRangeSelector onChange={setRange} />}>
+                            <AlertRecordList taskId={task.info.task_id} range={range} />
                         </Card>
                     </>
                 )

@@ -5,8 +5,8 @@ import './style/index.css'
 
 export default function LoginBanner() {
     const data = {
-        slogan: '物联网监测数据分析预警系统',
-        subSlogan: '基于dapr服务网格',
+        slogan: '物联网监测数据分析预警软件',
+        subSlogan: '',
         image: bannerImage,
     };
 

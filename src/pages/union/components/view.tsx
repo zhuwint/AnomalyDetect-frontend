@@ -25,6 +25,7 @@ export const ViewTask: React.FC = () => {
     const [task, setTask] = useState<UnionTaskStatus>();
     const [error, setError] = useState<string>("");
 
+
     useEffect(() => {
         setError("");
         fetchData();

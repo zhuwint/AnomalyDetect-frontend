@@ -61,13 +61,6 @@ export const UnionRecordList: React.FC<IProps> = (props) => {
                 compare: (a: R, b: R) => a.time.localeCompare(b.time),
             },
         },
-        // {
-        //     title: "当前值",
-        //     dataIndex: "value",
-        //     key: "value",
-        //     render: (text: number, row: AlertRecord) => <Text
-        //         style={{color: text < row.threshold_lower || text > row.threshold_upper ? "red" : "green"}}>{text.toFixed(5)}</Text>,
-        // },
         {
             title: "状态",
             dataIndex: "alert",
